@@ -29,8 +29,9 @@ def convertPPMISparse(mat):
         P[:,i] *= colMatSparse[i]
     cx = sp.coo_matrix(P)
     for i, j, v in zip(cx.row, cx.col, cx.data):
-        P[i,j] = max(math.log(v), 0)
+        P[i, j] = 0 if v <= 0 else P[i,j] = max(math.log(v), 0)
     return P
+
 
 def convertPPMI(mat):
     """
